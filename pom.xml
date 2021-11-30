@@ -8,10 +8,10 @@
         <version>2.6.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.learning.java</groupId>
-    <artifactId>userApp</artifactId>
+    <groupId>com.learning.springSecurity</groupId>
+    <artifactId>springSecurity</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>userApp</name>
+    <name>springSecurity</name>
     <description>Demo project to demonstrate Spring Boot security</description>
     <properties>
         <java.version>11</java.version>
