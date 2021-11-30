@@ -12,3 +12,10 @@ Once confirmed. User needs to do login to receive the access_token and refresh_t
 4. JWT token Authentication and Authorization for other APIs.
 5. Custom Exceptions
 6. Javax validations
+
+For sending Mails I used MailDev server locally.
+Use following command:
+
+$ npm install -g maildev
+
+$ maildev
