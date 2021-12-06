@@ -1,5 +1,6 @@
 package com.learning.springSecurity.email;
 
+import com.learning.springSecurity.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.thymeleaf.context.Context;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -21,6 +23,21 @@ public class EmailService implements EmailSender {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(EmailService.class);
     private final JavaMailSender mailSender;
+
+    @Override
+    public Email buildRegisterConfirmationEmail(UserEntity userEntity, String confirmationLink) {
+        Email email = new Email();
+        email.setFrom("confirmation@anuj-acadamy.com");
+        email.setTo(userEntity.getEmail());
+        email.setSubject("Security Demo App Register Confirmation");
+        email.setTemplateName("register_confirmation.html");
+        Map<String, Object> valueMap = new HashMap<>();
+        valueMap.put("firstName", userEntity.getFirstName());
+        valueMap.put("lastName", userEntity.getLastName());
+        valueMap.put("link", confirmationLink);
+        email.setModel(valueMap);
+        return email;
+    }
 
     @Override
     @Async
