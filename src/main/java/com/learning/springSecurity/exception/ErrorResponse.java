@@ -8,10 +8,9 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
-public class CustomException extends RuntimeException {
+public class ErrorResponse {
     private HttpStatus httpStatus;
     private final int statusCode;
-    private final String errorType;
     private final String message;
     private final LocalDateTime timestamp;
 }

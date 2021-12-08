@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/html">
+</body>
+<body>
+<p>Welcome <span th:text="${firstName}"/>,</p>
+<p>Your account has been registered successfully.</p>
+<p>Please activate your account by clicking on the link below.</p>
+
+<p><a th:href="@{${confirmationLink}}"><u>Activate Account</u></a></p>
+
+<p><b>Note:</b> This link is valid for the next 10 minutes only.</p>
+</body>
+</html>

@@ -10,10 +10,8 @@ import java.util.Map;
 @Setter
 @NoArgsConstructor
 public class Email {
-    private String to;
-    private String from;
+    private String sendTo;
     private String subject;
-    private String content;
     private String templateName;
-    private Map<String, Object> model;
+    private Map<String, Object> valueModel;
 }

@@ -1,9 +1,7 @@
 package com.learning.springSecurity.email;
 
-import com.learning.springSecurity.entity.UserEntity;
+import javax.mail.MessagingException;
 
 public interface EmailSender {
-    Email buildRegisterConfirmationEmail(UserEntity userEntity, String confirmationLink);
-
-    void send(Email email);
+    void send(Email email) throws MessagingException;
 }
