@@ -7,9 +7,9 @@ spring:
   application:
     name: spring-security-demo
   datasource:
-    password: postgres
+    password: ${postgres_password}
     url: jdbc:postgresql://localhost:5432/security_demo_app
-    username: postgres
+    username: ${postgres_username}
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -23,6 +23,7 @@ spring:
     port: 1025
     username: welcome
     password: welcome
+    from: ${from_email}
 
     properties:
       mail:

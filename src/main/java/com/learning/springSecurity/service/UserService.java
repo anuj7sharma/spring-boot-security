@@ -76,7 +76,7 @@ public class UserService implements UserDetailsService, IUserService {
         try {
             emailSender.send(getRegisterEmailObj(userEntity, confirmationLink));
         } catch (MessagingException e) {
-            throw new CustomException(HttpStatus.FORBIDDEN, 503, "FOrbidden", "Error while sending Email", LocalDateTime.now());
+            throw new CustomException(HttpStatus.FORBIDDEN, 503, "Forbidden", "Error while sending Email", LocalDateTime.now());
         }
 
         String message = "User has been registered successfully. Confirmation link sent to the registered Email. " + confirmationLink;
