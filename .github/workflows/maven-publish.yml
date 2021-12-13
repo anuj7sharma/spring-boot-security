@@ -23,10 +23,7 @@ jobs:
         cache: 'maven'
 
     - name: Build with Maven
-      run: |
-      mvn clean
-      mvn compile
-      mvn -B package --file pom.xml
+      run: mvn -B package --file pom.xml
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
