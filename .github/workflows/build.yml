@@ -41,7 +41,6 @@ jobs:
         restore-keys: ${{ runner.os }}-m2
 
     - name: Verify
-      working-directory: github-actions-java-maven
       run: |
         mvn clean compile test-compile && mvn verify
       env:
