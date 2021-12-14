@@ -1,7 +1,7 @@
 # This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
 # For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
 
-name: build_and_test
+name: build
 
 on:
   push:
@@ -22,28 +22,24 @@ jobs:
         distribution: 'adopt'
         architecture: x64
         cache: 'maven'
-        
-    - name: Set up Maven
-      uses: stCarolas/setup-maven@v4.2
-      with:
-        maven-version: 3.8.2
 
-    - name: Cache the Maven packages to speed up build
+    - name: Verify
+      run: |
+        mvn -B package --file pom.xml
+        mkdir staging && cp target/*.jar staging
+
+    - name: Setup Cache for Maven packages to speed up build
       uses: actions/cache@v1
       with:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
 
-    - name: Verify
-      working-directory: github-actions-java-maven
-      run: mvn -B verify
-
     - name: Upload Maven build artifact
       uses: actions/upload-artifact@v2
       with:
-        name: artifact.jar
-        path: github-actions-java-maven/target/github-actions-java-maven.jar
+        name: github-action-artifact
+        path: staging
 
 #    - run: "mkdir staging && cp target/*jar-with-dependencies.jar staging"
 #    - uses: docker/setup-qemu-action@v1
