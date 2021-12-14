@@ -42,7 +42,8 @@ jobs:
 
     - name: Verify
       working-directory: github-actions-java-maven
-      run: mvn -B verify
+      run: |
+        mvn clean compile test-compile && mvn verify
       env:
         GITHUB_TOKEN: ${{ secrets.MY_GIT_TOKEN }}
     - name: Upload Maven build artifact
