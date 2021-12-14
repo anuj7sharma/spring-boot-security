@@ -35,8 +35,8 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
 
-    - name: Verify
-      run: mvn --batch-mode --update-snapshots verify
+    - name: Build
+      run: mvn -B package --file pom.xml install
       env:
         GITHUB_TOKEN: ${{ secrets.MY_GIT_TOKEN }}
 
