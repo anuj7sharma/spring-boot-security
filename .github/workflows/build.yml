@@ -8,10 +8,33 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+env:
+  registry: my_registry_name
+  DB_HOST: localhost
+  DB_USERNAME: postgres
+  DB_PASSWORD: postgres
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    # Service containers to run with `container-job`
+    services:
+    # Label used to access the service container
+      postgres:
+      # Docker Hub image
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_PORT: 5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retires 5
+        ports:
+          - 5432: 5432
 
     steps:
     - uses: actions/checkout@v2
@@ -35,10 +58,16 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
 
-    - name: Build
-      run: mvn -B package --file pom.xml install
+    - name: Verify
+      working-directory: github-actions-java-maven
+      run: mvn -B verify
       env:
         GITHUB_TOKEN: ${{ secrets.MY_GIT_TOKEN }}
+    - name: Upload Maven build artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: artifact.jar
+        path: github-actions-java-maven/target/github-actions-java-maven.jar
 
 #    - run: "mkdir staging && cp target/*jar-with-dependencies.jar staging"
 #    - uses: docker/setup-qemu-action@v1
