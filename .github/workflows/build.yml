@@ -15,6 +15,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Install maven
+      run: |
+        sudo apt-get install maven
+        sudo update-ca-certificates -f
     - name: Set up JDK 11
       uses: actions/setup-java@v2
       with:
@@ -40,6 +44,7 @@ jobs:
       run: |
         ls -l
 
+#    - run: "mkdir staging && cp target/*.jar staging"
 #    - name: Upload Maven build artifact
 #      uses: actions/upload-artifact@v2
 #      with:
@@ -47,7 +52,6 @@ jobs:
 #        path: staging
 
 
-#    - run: "mkdir staging && cp target/*jar-with-dependencies.jar staging"
 #    - uses: docker/setup-qemu-action@v1
 #    - uses: docker/setup-buildx-action@v1
 #    - name: "Login to DockerHub"
