@@ -7,18 +7,21 @@ spring:
   application:
     name: spring-security-demo
   datasource:
-#    driverClassName: org.postgresql.Driver
+    driverClassName: org.postgresql.Driver
+    driver-class-name: org.postgresql.Driver
     password: postgres
     url: jdbc:postgresql://localhost:5432/security_demo_app
     username: postgres
   jpa:
     hibernate:
       ddl-auto: create-drop
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.PostgreSQLDialect
-#        format_sql: true
-#    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+        format_sql: true
+    show-sql: false
   mail:
     host: localhost
     port: 1025
