@@ -33,7 +33,7 @@ jobs:
     - name: Clean and Build
       run: |
         mvn clean
-        mvn build
+        mvn compile
         mvn test
 
     - name: Verify
