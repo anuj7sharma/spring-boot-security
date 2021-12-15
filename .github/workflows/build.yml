@@ -34,21 +34,23 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
 
-    - name: Clean and Build
+    - name: Clean And Compile
       run: |
         mvn clean
         mvn compile
 
     - name: Verify
       run: |
-        ls -l
+        mvn -B verify
 
-#    - run: "mkdir staging && cp target/*.jar staging"
-#    - name: Upload Maven build artifact
-#      uses: actions/upload-artifact@v2
-#      with:
-#        name: github-action-artifact
-#        path: staging
+    - name: Build
+      run: mvn -B package --file pom.xml
+    - run: "mkdir staging && cp target/*.jar staging"
+    - name: Upload Maven build artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: github-action-artifact
+        path: staging
 
 
 #    - uses: docker/setup-qemu-action@v1
