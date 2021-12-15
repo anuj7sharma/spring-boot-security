@@ -8,7 +8,6 @@ spring:
     name: spring-security-demo
   datasource:
     driverClassName: org.postgresql.Driver
-    driver-class-name: org.postgresql.Driver
     password: postgres
     url: jdbc:postgresql://localhost:5432/security_demo_app
     username: postgres
@@ -18,8 +17,6 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        temp:
-          use_jdbc_metadata_defaults: false
         format_sql: true
     show-sql: false
   mail:
