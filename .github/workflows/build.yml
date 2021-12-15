@@ -25,21 +25,21 @@ jobs:
 
     - name: Verify
       run: |
-        mvn -B package --file pom.xml
-        mkdir staging && cp target/*.jar staging
+        ls -l
+        mvn --version
 
-    - name: Setup Cache for Maven packages to speed up build
-      uses: actions/cache@v1
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
-
-    - name: Upload Maven build artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: github-action-artifact
-        path: staging
+#    - name: Setup Cache for Maven packages to speed up build
+#      uses: actions/cache@v1
+#      with:
+#        path: ~/.m2
+#        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+#        restore-keys: ${{ runner.os }}-m2
+#
+#    - name: Upload Maven build artifact
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name: github-action-artifact
+#        path: staging
 
 #    - run: "mkdir staging && cp target/*jar-with-dependencies.jar staging"
 #    - uses: docker/setup-qemu-action@v1
