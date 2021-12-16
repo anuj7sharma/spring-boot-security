@@ -1,0 +1,45 @@
+server:
+  port: 8090
+  error:
+    include-message: always
+    include-binding-errors: always
+spring:
+  application:
+    name: spring-security-demo
+  datasource:
+    url: jdbc:postgresql://localhost:5432/security_demo_app
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: false
+  mail:
+    host: localhost
+    port: 1025
+    username: welcome
+    password: welcome
+    from: confirmation@anuj-acadamy.com
+
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: "*"
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+logging:
+  level:
+    root: WARN
+    org:
+      springframework:
+        web: DEBUG
+      hibernate: ERROR
