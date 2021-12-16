@@ -1,0 +1,27 @@
+version: '1.0'
+
+services:
+  api:
+    image: 'spring-boot-security:latest'
+    build:
+      context: .
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/security_demo_app
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    ports:
+      - 8090:8090
+  db:
+    image: postgres
+    container_name: security-postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: security_demo_app
+
