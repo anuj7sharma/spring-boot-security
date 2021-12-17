@@ -46,7 +46,7 @@ jobs:
     - name: Build
       run: |
         mvn -B package --file pom.xml
-        mkdir staging && cp target/*.jar staging
+        mkdir staging && cp access-control/target/*.jar staging
 
     - name: Upload Maven build artifact
       uses: actions/upload-artifact@v2
