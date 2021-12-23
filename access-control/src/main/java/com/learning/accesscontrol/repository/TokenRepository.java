@@ -13,14 +13,23 @@ import java.util.Optional;
 @Repository
 @Transactional(readOnly = true)
 public interface TokenRepository extends JpaRepository<TokenEntity, Long> {
-    Optional<TokenEntity> findByTokenAndTokenType(String token, String tokenType);
-    Optional<TokenEntity> findByToken(String token);
+Optional<TokenEntity> findByToken(String token);
+
+    Optional<TokenEntity> findByTokenTypeAndUserId(String tokenType, Long userId);
 
     @Transactional
     @Modifying
-    @Query("UPDATE TokenEntity c " +
-            "SET c.confirmedAt = ?2 " +
-            "WHERE c.token = ?1")
+    @Query("UPDATE TokenEntity t " +
+            "SET t.confirmedAt = ?2 " +
+            "WHERE t.token = ?1")
     int updateConfirmedAt(String token,
                           LocalDateTime confirmedAt);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE TokenEntity t " +
+            "SET t.expiresAt = ?2 " +
+            "WHERE t.token = ?1")
+    int updateExpiresAt(String token,
+                        LocalDateTime expiresAt);
 }

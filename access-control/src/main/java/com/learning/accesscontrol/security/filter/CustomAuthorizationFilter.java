@@ -29,7 +29,9 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
     private static final List<String> allowedUrl = List.of("/api/v1/login",
             "/api/v1/user/register",
             "/api/v1/user/confirmation/**",
-            "/api/v1/token/refresh");
+            "/api/v1/token/refresh",
+            "/api/v1/user/forgot-password",
+            "/api/v1/user/change-password");
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

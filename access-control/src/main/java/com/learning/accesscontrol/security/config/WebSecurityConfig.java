@@ -15,6 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import java.util.List;
+
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
@@ -22,14 +24,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
+    private static final List<String> allowedUrl = List.of("/api/v1/login",
+            "/api/v1/user/register",
+            "/api/v1/user/confirmation/**",
+            "/api/v1/token/refresh",
+            "/api/v1/user/forgot-password",
+            "/api/v1/user/change-password");
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
         customAuthenticationFilter.setFilterProcessesUrl("/api/v1/login");
         http.csrf().disable()
                 .authorizeHttpRequests()
-                .antMatchers("/api/v*/user/register/**", "/api/v*/user/confirmation/**",
-                        "/api/v*/token/refresh")
+                .antMatchers("/api/v1/login",
+                        "/api/v1/user/register",
+                        "/api/v1/user/confirmation/**",
+                        "/api/v1/token/refresh",
+                        "/api/v1/user/forgot-password",
+                        "/api/v1/user/change-password")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
