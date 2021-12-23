@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 @Transactional(readOnly = true)
 public interface TokenRepository extends JpaRepository<TokenEntity, Long> {
-    Optional<TokenEntity> findByToken(String token);
+Optional<TokenEntity> findByToken(String token);
 
     Optional<TokenEntity> findByTokenTypeAndUserId(String tokenType, Long userId);
 
